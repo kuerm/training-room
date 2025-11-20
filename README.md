@@ -129,7 +129,7 @@ Once you've commented your commits you looked more closely (maybe in conjunction
 
 Now's the time for assessing your progress. Did your work move along as expected? Where did you struggle? Where did it flow? Look for the conflicts between your expectation and reality. Find any deviation and hesitation with regard to what you wanted to do and what you actually did.
 
-* Why hesitation/deviation? Because they can be considered waste in the Lean sense. [Read more about the reasoning behind that in an article by Ralf Westphal.](https://ralfw.de/2016/08/lets-play-lean/)
+* Why hesitation/deviation? Because they can be considered waste in the Lean sense. [Read more about the reasoning behind that in an article by Ralf Westphal.](https://ralfw.de/lets-play-lean/)
 * Why "flow"? Because being good at something, being fluent means that your ideas can flow. It's easy for your to manifest any idea about how increase a quality in your work piece. [Read more about the notion of idea flow in a book by Janelle Arty Starr.](https://leanpub.com/ideaflow)
 
 Here also stay focused on just that. Don't get ahead of yourself or the method. First it was just logging raw thoughts. Now it's just logging conflicts/flow.
