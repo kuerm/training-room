@@ -23,9 +23,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AccountTest {
     @Test
     void printStatementWhenNoDepositHappenedThenPrintEmptyAccount() {
-        var testee = new Account();
+        Account testee = new Account();
 
-        var actual = testee.printStatement();
+        String actual = testee.printStatement();
 
         assertThat(actual).isEqualTo("Date      Amount   Balanace");
     }
