@@ -22,6 +22,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class AccountTest {
     @Test
+    void depositWhen() {
+    }
+
+    @Test
     void dada() {
         assertThat(true).isTrue();
     }
