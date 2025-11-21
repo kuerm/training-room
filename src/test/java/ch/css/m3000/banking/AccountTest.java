@@ -2,6 +2,8 @@ package ch.css.m3000.banking;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -33,7 +35,7 @@ public class AccountTest {
     @Test
     void printStatementWhenDepositHappenThenPrintWithDeposit() {
         Account testee = new Account();
-        testee.deposit("200");
+        testee.deposit(200);
 
         String actual = testee.printStatement();
 
@@ -43,16 +45,23 @@ public class AccountTest {
 
     }
 
+    private interface BankingTransaction {
+    }
+
+    private record Deposit(int amount) implements BankingTransaction {
+    }
+
     private class Account {
 
         public static final String HEADER = "Date       Amount   Balance";
+        private List<Deposit> transactions;
 
         public String printStatement() {
             return HEADER;
         }
 
-        public void deposit(final String amount) {
-            this.transactions.add()
+        public void deposit(final int amount) {
+            this.transactions.add(new Deposit(amount));
         }
     }
 }
