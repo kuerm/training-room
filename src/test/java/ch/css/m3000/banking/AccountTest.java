@@ -2,6 +2,7 @@ package ch.css.m3000.banking;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,7 +43,6 @@ public class AccountTest {
         assertThat(actual).isEqualTo(""" 
                 Date       Amount   Balance
                 21.11.2025 +200    200""");
-
     }
 
     private interface BankingTransaction {
@@ -54,7 +54,7 @@ public class AccountTest {
     private class Account {
 
         public static final String HEADER = "Date       Amount   Balance";
-        private List<Deposit> transactions;
+        private final List<BankingTransaction> transactions = new ArrayList<>();
 
         public String printStatement() {
             return HEADER;
