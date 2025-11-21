@@ -22,11 +22,17 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class AccountTest {
     @Test
-    void depositWhen() {
+    void printStatementWhenNoDepositHappenedThenPrintEmptyAccount() {
+        var testee = new Account();
+
+        var actual = testee.printStatement();
+
+        assertThat(actual).isEqualTo("Date      Amount   Balanace");
     }
 
-    @Test
-    void dada() {
-        assertThat(true).isTrue();
+    private class Account {
+        public String printStatement() {
+            return null;
+        }
     }
 }
