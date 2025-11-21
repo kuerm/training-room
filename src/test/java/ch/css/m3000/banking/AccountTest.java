@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Your Task
@@ -75,11 +73,10 @@ public class AccountTest {
 
     @Test
     void printStatementWhenTwoDepositHappenOnDifferentDatesThenPrintWithDeposit() {
-        DateTimeAdapter dateTimeAdapterMock = mock(DateTimeAdapter.class);
-        when(dateTimeAdapterMock.currentDate())
-                .thenReturn(LocalDate.of(2025, Month.NOVEMBER, 21))
-                .thenReturn(LocalDate.of(2025, Month.DECEMBER, 22));
-        var testee = new Account(dateTimeAdapterMock);
+        DateTimeAdapter fakeDateTimeAdapter = new FakeDateTimeAdapter(
+                LocalDate.of(2025, Month.NOVEMBER, 21),
+                LocalDate.of(2025, Month.DECEMBER, 22));
+        var testee = new Account(fakeDateTimeAdapter);
         testee.deposit(200);
         testee.deposit(300);
 
@@ -141,6 +138,20 @@ public class AccountTest {
         public void deposit(final int amount) {
             LocalDate depositDate = dateTimeAdapter.currentDate();
             this.transactions.add(new Deposit(amount, depositDate));
+        }
+    }
+
+    private class FakeDateTimeAdapter implements DateTimeAdapter {
+        private final LocalDate[] dates;
+        private int i = 0;
+
+        public FakeDateTimeAdapter(LocalDate... dates) {
+            this.dates = dates;
+        }
+
+        @Override
+        public LocalDate currentDate() {
+            return dates[i++];
         }
     }
 }
