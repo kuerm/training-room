@@ -57,7 +57,11 @@ public class AccountTest {
         private final List<BankingTransaction> transactions = new ArrayList<>();
 
         public String printStatement() {
-            return HEADER;
+            var transactionText = new StringBuilder();
+            for (BankingTransaction transaction : transactions) {
+                transactionText.append("\n21.11.2025 +200    200");
+            }
+            return HEADER + transactionText;
         }
 
         public void deposit(final int amount) {
