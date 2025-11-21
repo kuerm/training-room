@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ch.css.m3000</groupId>
+    <artifactId>banking-kata</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>banking-kata</name>
+    <properties>
+        <java.version>25</java.version>
+    </properties>
+    <dependencies>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>5.13.4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <developers>
+        <developer>
+            <id>kuerm</id>
+            <name>Martin Kurmann</name>
+            <email>kuerm@gmx.net</email>
+            <url>https://martin.kurmann.org</url>
+            <organization>CSS</organization>
+            <organizationUrl>https://www.css.ch</organizationUrl>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+                <role>ux-designer</role>
+            </roles>
+            <timezone>Europe/Bern</timezone>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:https://github.com/kuerm/training-room.git</connection>
+        <developerConnection>scm:git:https://github.com/kuerm/training-room.git</developerConnection>
+        <url>https://github.com/kuerm/training-room</url>
+    </scm>
+
+</project>
