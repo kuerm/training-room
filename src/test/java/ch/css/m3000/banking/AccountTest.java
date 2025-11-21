@@ -5,9 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -86,59 +83,6 @@ public class AccountTest {
                 Date       Amount   Balance
                 21.11.2025 +200    200
                 22.12.2025 +300    500""");
-    }
-
-    private interface BankingTransaction {
-        String amountText();
-
-        String dateText();
-
-        int calculateNewTotal(int currentTotal);
-    }
-
-    private record Deposit(int amount, LocalDate date) implements BankingTransaction {
-
-        @Override
-        public String dateText() {
-            return DateTimeFormatter.ofPattern("dd.MM.yyyy").format(date);
-        }
-
-        @Override
-        public int calculateNewTotal(final int currentTotal) {
-            return currentTotal + amount;
-        }
-
-        @Override
-        public String amountText() {
-            return "+" + amount;
-        }
-    }
-
-    private class Account {
-
-        public static final String HEADER = "Date       Amount   Balance";
-        private final List<BankingTransaction> transactions = new ArrayList<>();
-
-        private final DateTimeAdapter dateTimeAdapter;
-
-        private Account(final DateTimeAdapter dateTimeAdapter) {
-            this.dateTimeAdapter = dateTimeAdapter;
-        }
-
-        public String printStatement() {
-            var transactionText = new StringBuilder();
-            var currentTotal = 0;
-            for (BankingTransaction transaction : transactions) {
-                currentTotal = transaction.calculateNewTotal(currentTotal);
-                transactionText.append("\n%s %s    %d".formatted(transaction.dateText(), transaction.amountText(), currentTotal));
-            }
-            return HEADER + transactionText;
-        }
-
-        public void deposit(final int amount) {
-            LocalDate depositDate = dateTimeAdapter.currentDate();
-            this.transactions.add(new Deposit(amount, depositDate));
-        }
     }
 
     private class FakeDateTimeAdapter implements DateTimeAdapter {
