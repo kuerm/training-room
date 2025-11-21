@@ -46,9 +46,15 @@ public class AccountTest {
     }
 
     private interface BankingTransaction {
+        String getAmount();
     }
 
     private record Deposit(int amount) implements BankingTransaction {
+
+        @Override
+        public String getAmount() {
+            return "+" + amount;
+        }
     }
 
     private class Account {
@@ -59,7 +65,7 @@ public class AccountTest {
         public String printStatement() {
             var transactionText = new StringBuilder();
             for (BankingTransaction transaction : transactions) {
-                transactionText.append("\n21.11.2025 +200    200");
+                transactionText.append("\n21.11.2025 " + transaction.getAmount() + "    200");
             }
             return HEADER + transactionText;
         }
