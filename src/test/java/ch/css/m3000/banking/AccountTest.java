@@ -1,5 +1,6 @@
 package ch.css.m3000.banking;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -27,9 +28,16 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 23.8.2016    -100      400
  */
 public class AccountTest {
+    private Account testee;
+
+    @BeforeEach
+    void setUp() {
+        testee = new Account(new DateTimeAdapter() {
+        });
+    }
+
     @Test
     void printStatementWhenNoDepositHappenedThenPrintEmptyAccount() {
-        Account testee = new Account();
 
         String actual = testee.printStatement();
 
@@ -38,7 +46,6 @@ public class AccountTest {
 
     @Test
     void printStatementWhenDepositHappenThenPrintWithDeposit() {
-        Account testee = new Account();
         testee.deposit(200);
 
         String actual = testee.printStatement();
@@ -50,7 +57,6 @@ public class AccountTest {
 
     @Test
     void printStatementWhenTwoDepositHappenThenPrintWithDeposit() {
-        Account testee = new Account();
         testee.deposit(200);
         testee.deposit(300);
 
@@ -71,7 +77,7 @@ public class AccountTest {
     }
 
     private interface DateTimeAdapter {
-        
+
     }
 
     private record Deposit(int amount, LocalDate date) implements BankingTransaction {
@@ -97,7 +103,11 @@ public class AccountTest {
         public static final String HEADER = "Date       Amount   Balance";
         private final List<BankingTransaction> transactions = new ArrayList<>();
 
-        private DateTimeAdapter dateTimeAdapter;
+        private final DateTimeAdapter dateTimeAdapter;
+
+        private Account(final DateTimeAdapter dateTimeAdapter) {
+            this.dateTimeAdapter = dateTimeAdapter;
+        }
 
         public String printStatement() {
             var transactionText = new StringBuilder();
