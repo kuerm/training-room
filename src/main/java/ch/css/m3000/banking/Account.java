@@ -29,4 +29,8 @@ class Account {
         LocalDate depositDate = dateTimeAdapter.currentDate();
         this.transactions.add(new Deposit(amount, depositDate));
     }
+
+    public void withdraw(final int amount) {
+
+    }
 }

@@ -66,6 +66,20 @@ public class AccountTest {
                 Date       Amount   Balance
                 21.11.2025 +200    200
                 21.11.2025 +300    500""");
+
+    }
+
+    @Test
+    void printStatementWhenOneDepositAndOneWithdrawHappenThenPrintThem() {
+        testee.deposit(200);
+        testee.withdraw(100);
+
+        String actual = testee.printStatement();
+
+        assertThat(actual).isEqualTo(""" 
+                Date       Amount   Balance
+                21.11.2025 +200    200
+                21.11.2025 -100    100""");
     }
 
     @Test
@@ -84,6 +98,7 @@ public class AccountTest {
                 21.11.2025 +200    200
                 22.12.2025 +300    500""");
     }
+
 
     private class FakeDateTimeAdapter implements DateTimeAdapter {
         private final LocalDate[] dates;
