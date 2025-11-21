@@ -45,14 +45,22 @@ public class AccountTest {
                 21.11.2025 +200    200""");
     }
 
+    @Test
+    void printStatementWhenTwoDepositHappenThenPrintWithDeposit() {
+        Account testee = new Account();
+        testee.deposit(200);
+        testee.deposit(300);
+
+        String actual = testee.printStatement();
+
+        assertThat(actual).isEqualTo(""" 
+                Date       Amount   Balance
+                21.11.2025 +200    200
+                21.11.2025 +300    500""");
+    }
+
     private interface BankingTransaction {
         String amountText();
-
-        default boolean isDeposit() {
-            return false;
-        }
-
-        int amount();
 
         String dateText();
 
@@ -60,10 +68,6 @@ public class AccountTest {
     }
 
     private record Deposit(int amount) implements BankingTransaction {
-        @Override
-        public boolean isDeposit() {
-            return true;
-        }
 
         @Override
         public String dateText() {
