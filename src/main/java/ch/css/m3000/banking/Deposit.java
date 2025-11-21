@@ -3,7 +3,14 @@ package ch.css.m3000.banking;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-record Deposit(int amount, LocalDate date) implements BankingTransaction {
+class Deposit implements BankingTransaction {
+    private final int amount;
+    private final LocalDate date;
+
+    public Deposit(int amount, LocalDate date) {
+        this.amount = amount;
+        this.date = date;
+    }
 
     @Override
     public String dateText() {
