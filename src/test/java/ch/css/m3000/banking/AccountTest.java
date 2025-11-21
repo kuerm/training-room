@@ -33,6 +33,10 @@ public class AccountTest {
     @BeforeEach
     void setUp() {
         testee = new Account(new DateTimeAdapter() {
+            @Override
+            public LocalDate currentDate() {
+                return LocalDate.of(2025, Month.NOVEMBER, 21);
+            }
         });
     }
 
@@ -78,6 +82,7 @@ public class AccountTest {
 
     private interface DateTimeAdapter {
 
+        LocalDate currentDate();
     }
 
     private record Deposit(int amount, LocalDate date) implements BankingTransaction {
@@ -120,7 +125,8 @@ public class AccountTest {
         }
 
         public void deposit(final int amount) {
-            this.transactions.add(new Deposit(amount, LocalDate.of(2025, Month.NOVEMBER, 21)));
+            LocalDate depositDate = dateTimeAdapter.currentDate();
+            this.transactions.add(new Deposit(amount, depositDate));
         }
     }
 }
