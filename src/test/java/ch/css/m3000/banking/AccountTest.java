@@ -82,6 +82,9 @@ public class AccountTest {
                 21.11.2025 -100    100""");
     }
 
+    /**
+     * Since the interface is fix it has to be solved by Exception - or withdraw to below 0 is allowed
+     */
     @Test
     void printStatementWhenNoDepositButWithdrawThenThrowException() {
         assertThatExceptionOfType(NotEnoughMoneyOnBankAccountException.class).isThrownBy(() -> testee.withdraw(5));
