@@ -2,6 +2,9 @@ package ch.css.m3000.banking;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,11 +70,11 @@ public class AccountTest {
         int calculateNewTotal(int currentTotal);
     }
 
-    private record Deposit(int amount) implements BankingTransaction {
+    private record Deposit(int amount, LocalDate date) implements BankingTransaction {
 
         @Override
         public String dateText() {
-            return "21.11.2025";
+            return DateTimeFormatter.ofPattern("dd.MM.yyyy").format(date);
         }
 
         @Override
@@ -101,7 +104,7 @@ public class AccountTest {
         }
 
         public void deposit(final int amount) {
-            this.transactions.add(new Deposit(amount));
+            this.transactions.add(new Deposit(amount, LocalDate.of(2025, Month.NOVEMBER, 21)));
         }
     }
 }
