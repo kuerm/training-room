@@ -99,11 +99,6 @@ public class AccountTest {
         int calculateNewTotal(int currentTotal);
     }
 
-    interface DateTimeAdapter {
-
-        LocalDate currentDate();
-    }
-
     private record Deposit(int amount, LocalDate date) implements BankingTransaction {
 
         @Override
