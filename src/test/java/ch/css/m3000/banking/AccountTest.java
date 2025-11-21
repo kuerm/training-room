@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Your Task
@@ -42,7 +44,6 @@ public class AccountTest {
 
     @Test
     void printStatementWhenNoDepositHappenedThenPrintEmptyAccount() {
-
         String actual = testee.printStatement();
 
         assertThat(actual).isEqualTo("Date       Amount   Balance");
@@ -70,6 +71,24 @@ public class AccountTest {
                 Date       Amount   Balance
                 21.11.2025 +200    200
                 21.11.2025 +300    500""");
+    }
+
+    @Test
+    void printStatementWhenTwoDepositHappenOnDifferentDatesThenPrintWithDeposit() {
+        DateTimeAdapter dateTimeAdapterMock = mock(DateTimeAdapter.class);
+        when(dateTimeAdapterMock.currentDate())
+                .thenReturn(LocalDate.of(2025, Month.NOVEMBER, 21))
+                .thenReturn(LocalDate.of(2025, Month.DECEMBER, 22));
+        var testee = new Account(dateTimeAdapterMock);
+        testee.deposit(200);
+        testee.deposit(300);
+
+        String actual = testee.printStatement();
+
+        assertThat(actual).isEqualTo(""" 
+                Date       Amount   Balance
+                21.11.2025 +200    200
+                22.12.2025 +300    500""");
     }
 
     private interface BankingTransaction {
