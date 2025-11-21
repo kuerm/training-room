@@ -52,7 +52,7 @@ public class AccountTest {
         }
 
         public void deposit(final String amount) {
-
+            this.transactions.add()
         }
     }
 }
