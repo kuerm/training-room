@@ -27,15 +27,32 @@ public class AccountTest {
 
         String actual = testee.printStatement();
 
-        assertThat(actual).isEqualTo("Date      Amount   Balance");
+        assertThat(actual).isEqualTo("Date       Amount   Balance");
+    }
+
+    @Test
+    void printStatementWhenDepositHappenThenPrintWithDeposit() {
+        Account testee = new Account();
+        testee.deposit("200");
+
+        String actual = testee.printStatement();
+
+        assertThat(actual).isEqualTo(""" 
+                Date       Amount   Balance
+                21.11.2025 +200    200""");
+
     }
 
     private class Account {
 
-        public static final String HEADER = "Date      Amount   Balance";
+        public static final String HEADER = "Date       Amount   Balance";
 
         public String printStatement() {
             return HEADER;
+        }
+
+        public void deposit(final String amount) {
+
         }
     }
 }
