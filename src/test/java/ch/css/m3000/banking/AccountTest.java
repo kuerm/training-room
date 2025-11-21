@@ -70,6 +70,10 @@ public class AccountTest {
         int calculateNewTotal(int currentTotal);
     }
 
+    private interface DateTimeAdapter {
+        
+    }
+
     private record Deposit(int amount, LocalDate date) implements BankingTransaction {
 
         @Override
@@ -92,6 +96,8 @@ public class AccountTest {
 
         public static final String HEADER = "Date       Amount   Balance";
         private final List<BankingTransaction> transactions = new ArrayList<>();
+
+        private DateTimeAdapter dateTimeAdapter;
 
         public String printStatement() {
             var transactionText = new StringBuilder();
