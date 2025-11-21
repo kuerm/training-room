@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.Month;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 /**
  * Your Task
@@ -66,7 +67,6 @@ public class AccountTest {
                 Date       Amount   Balance
                 21.11.2025 +200    200
                 21.11.2025 +300    500""");
-
     }
 
     @Test
@@ -80,6 +80,11 @@ public class AccountTest {
                 Date       Amount   Balance
                 21.11.2025 +200    200
                 21.11.2025 -100    100""");
+    }
+
+    @Test
+    void printStatementWhenNoDepositButWithdrawThenThrowException() {
+        assertThatExceptionOfType(NotEnoughMoneyOnBankAccountException.class).isThrownBy(() -> testee.withdraw(5));
     }
 
     @Test

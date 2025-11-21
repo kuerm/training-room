@@ -31,7 +31,18 @@ class Account {
     }
 
     public void withdraw(final int amount) {
+        validateWithdraw(amount);
         LocalDate depositDate = dateTimeAdapter.currentDate();
         this.transactions.add(new Withdraw(amount, depositDate));
+    }
+
+    private void validateWithdraw(final int amount) {
+        int currentTotal = 0;
+        for (BankingTransaction transaction : transactions) {
+            currentTotal = transaction.calculateNewTotal(currentTotal);
+        }
+        if (currentTotal - amount < 0) {
+            throw new NotEnoughMoneyOnBankAccountException();
+        }
     }
 }
