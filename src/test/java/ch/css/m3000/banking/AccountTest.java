@@ -99,7 +99,7 @@ public class AccountTest {
         int calculateNewTotal(int currentTotal);
     }
 
-    private interface DateTimeAdapter {
+    interface DateTimeAdapter {
 
         LocalDate currentDate();
     }
