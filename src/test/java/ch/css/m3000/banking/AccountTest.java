@@ -46,13 +46,23 @@ public class AccountTest {
     }
 
     private interface BankingTransaction {
-        String getAmount();
+        String amountText();
+
+        default boolean isDeposit() {
+            return false;
+        }
+
+        int amount();
     }
 
     private record Deposit(int amount) implements BankingTransaction {
+        @Override
+        public boolean isDeposit() {
+            return true;
+        }
 
         @Override
-        public String getAmount() {
+        public String amountText() {
             return "+" + amount;
         }
     }
@@ -64,8 +74,10 @@ public class AccountTest {
 
         public String printStatement() {
             var transactionText = new StringBuilder();
+            var currentTotal = 0;
             for (BankingTransaction transaction : transactions) {
-                transactionText.append("\n21.11.2025 " + transaction.getAmount() + "    200");
+                currentTotal = transaction.isDeposit() ? currentTotal + transaction.amount() : currentTotal - transaction.amount();
+                transactionText.append("\n21.11.2025 " + transaction.amountText() + "    200");
             }
             return HEADER + transactionText;
         }
