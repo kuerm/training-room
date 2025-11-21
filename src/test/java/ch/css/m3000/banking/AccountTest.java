@@ -77,7 +77,7 @@ public class AccountTest {
             var currentTotal = 0;
             for (BankingTransaction transaction : transactions) {
                 currentTotal = transaction.isDeposit() ? currentTotal + transaction.amount() : currentTotal - transaction.amount();
-                transactionText.append("\n21.11.2025 " + transaction.amountText() + "    " + currentTotal);
+                transactionText.append("\n%s %s    %d".formatted("asdf", transaction.amountText(), currentTotal));
             }
             return HEADER + transactionText;
         }
