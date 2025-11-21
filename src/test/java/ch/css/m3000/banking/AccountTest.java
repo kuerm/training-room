@@ -55,6 +55,8 @@ public class AccountTest {
         int amount();
 
         String dateText();
+
+        int calculateNewTotal(int currentTotal);
     }
 
     private record Deposit(int amount) implements BankingTransaction {
@@ -66,6 +68,11 @@ public class AccountTest {
         @Override
         public String dateText() {
             return "21.11.2025";
+        }
+
+        @Override
+        public int calculateNewTotal(final int currentTotal) {
+            return currentTotal + amount;
         }
 
         @Override
@@ -83,7 +90,7 @@ public class AccountTest {
             var transactionText = new StringBuilder();
             var currentTotal = 0;
             for (BankingTransaction transaction : transactions) {
-                currentTotal = transaction.isDeposit() ? currentTotal + transaction.amount() : currentTotal - transaction.amount();
+                currentTotal = transaction.calculateNewTotal(currentTotal);
                 transactionText.append("\n%s %s    %d".formatted(transaction.dateText(), transaction.amountText(), currentTotal));
             }
             return HEADER + transactionText;
