@@ -1,4 +1,4 @@
-package ch.css.m3000.banking;
+package ch.css.m3000.banking.adapter;
 
 import java.time.LocalDate;
 

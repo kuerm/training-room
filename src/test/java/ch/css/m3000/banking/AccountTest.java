@@ -1,5 +1,6 @@
 package ch.css.m3000.banking;
 
+import ch.css.m3000.banking.adapter.DateTimeAdapter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
