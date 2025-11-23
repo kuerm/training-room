@@ -1,19 +1,20 @@
 package ch.css.m3000.banking.application;
 
+import ch.css.m3000.banking.adapter.AccountPrinterAdapter;
 import ch.css.m3000.banking.adapter.DateTimeAdapter;
 import ch.css.m3000.banking.adapter.SystemDateTimeAdapter;
-import ch.css.m3000.banking.domain.BankingTransaction;
 import ch.css.m3000.banking.domain.BankingTransactions;
 import ch.css.m3000.banking.domain.NotEnoughMoneyOnBankAccountException;
+import ch.css.m3000.banking.domain.PrinterAdapter;
 
 import java.time.LocalDate;
 
 public class Account {
 
-    public static final String HEADER = "Date       Amount   Balance";
     private final BankingTransactions transactions = new BankingTransactions();
 
     private final DateTimeAdapter dateTimeAdapter;
+    private final PrinterAdapter accountPrinter = new AccountPrinterAdapter();
 
     public Account() {
         this(new SystemDateTimeAdapter());
@@ -28,13 +29,7 @@ public class Account {
     }
 
     public String printStatement() {
-        var transactionText = new StringBuilder();
-        var currentTotal = 0;
-        for (BankingTransaction transaction : transactions) {
-            currentTotal = transaction.calculateNewTotal(currentTotal);
-            transactionText.append("\n%s %s    %d".formatted(transaction.dateText(), transaction.amountText(), currentTotal));
-        }
-        return HEADER + transactionText;
+        return accountPrinter.print(transactions);
     }
 
     public void deposit(final int amount) {
