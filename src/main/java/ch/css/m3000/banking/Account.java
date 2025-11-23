@@ -1,6 +1,7 @@
 package ch.css.m3000.banking;
 
 import ch.css.m3000.banking.adapter.DateTimeAdapter;
+import ch.css.m3000.banking.adapter.SystemDateTimeAdapter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,6 +13,10 @@ public class Account {
     private final List<BankingTransaction> transactions = new ArrayList<>();
 
     private final DateTimeAdapter dateTimeAdapter;
+
+    public Account() {
+        this(new SystemDateTimeAdapter());
+    }
 
     public Account(final DateTimeAdapter dateTimeAdapter) {
         this.dateTimeAdapter = dateTimeAdapter;

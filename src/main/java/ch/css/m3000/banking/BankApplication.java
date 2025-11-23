@@ -1,13 +1,9 @@
 package ch.css.m3000.banking;
 
-import ch.css.m3000.banking.adapter.DateTimeAdapter;
-import ch.css.m3000.banking.adapter.SystemDateTimeAdapter;
-
 import java.util.Scanner;
 
 public class BankApplication {
 
-    private static final String START_MESSAGE = "Banking Application Started";
     private static final String INSTRUCTIONS = "Enter transactions (e.g., +200 for deposit, -100 for withdraw, 'quit' to exit):";
     private static final String INPUT_PROMPT = "> ";
     private static final String QUIT_COMMAND = "quit";
@@ -19,10 +15,8 @@ public class BankApplication {
     private static final String TRANSACTION_PREFIX_ERROR = "Transaction must start with + or -";
 
     static void main() {
-        DateTimeAdapter dateTimeAdapter = new SystemDateTimeAdapter();
-        Account account = new Account(dateTimeAdapter);
+        Account account = new Account();
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println(START_MESSAGE);
             System.out.println(INSTRUCTIONS);
 
             while (true) {
@@ -31,7 +25,7 @@ public class BankApplication {
 
                 if (input.equalsIgnoreCase(QUIT_COMMAND)) {
                     System.out.println(EXIT_MESSAGE);
-                    break;
+                    return;
                 }
 
                 if (input.isEmpty()) {
