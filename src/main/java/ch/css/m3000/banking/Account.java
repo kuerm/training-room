@@ -4,13 +4,11 @@ import ch.css.m3000.banking.adapter.DateTimeAdapter;
 import ch.css.m3000.banking.adapter.SystemDateTimeAdapter;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Account {
 
     public static final String HEADER = "Date       Amount   Balance";
-    private final List<BankingTransaction> transactions = new ArrayList<>();
+    private final BankingTransactions transactions = new BankingTransactions();
 
     private final DateTimeAdapter dateTimeAdapter;
 
@@ -20,6 +18,10 @@ public class Account {
 
     public Account(final DateTimeAdapter dateTimeAdapter) {
         this.dateTimeAdapter = dateTimeAdapter;
+    }
+
+    private static boolean isNotEnoughMoneyOnTheAccount(final int amount, final int currentTotal) {
+        return currentTotal - amount < 0;
     }
 
     public String printStatement() {
@@ -34,21 +36,17 @@ public class Account {
 
     public void deposit(final int amount) {
         LocalDate depositDate = dateTimeAdapter.currentDate();
-        this.transactions.add(new Deposit(amount, depositDate));
+        this.transactions.addDeposit(amount, depositDate);
     }
 
     public void withdraw(final int amount) {
         validateWithdraw(amount);
         LocalDate depositDate = dateTimeAdapter.currentDate();
-        this.transactions.add(new Withdraw(amount, depositDate));
+        this.transactions.addWithdraw(amount, depositDate);
     }
 
     private void validateWithdraw(final int amount) {
-        int currentTotal = 0;
-        for (BankingTransaction transaction : transactions) {
-            currentTotal = transaction.calculateNewTotal(currentTotal);
-        }
-        if (currentTotal - amount < 0) {
+        if (isNotEnoughMoneyOnTheAccount(amount, transactions.currentTotal())) {
             throw new NotEnoughMoneyOnBankAccountException();
         }
     }
