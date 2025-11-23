@@ -1,14 +1,8 @@
-package ch.css.m3000.banking;
+package ch.css.m3000.banking.domain;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public record Deposit(int amount, LocalDate date) implements BankingTransaction {
-
-    @Override
-    public String dateText() {
-        return DateTimeFormatter.ofPattern("dd.MM.yyyy").format(date);
-    }
 
     @Override
     public int calculateNewTotal(final int currentTotal) {

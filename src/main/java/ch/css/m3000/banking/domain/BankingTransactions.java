@@ -1,4 +1,4 @@
-package ch.css.m3000.banking;
+package ch.css.m3000.banking.domain;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,4 +30,3 @@ public final class BankingTransactions implements Iterable<BankingTransaction> {
         return currentTotal;
     }
 }
-

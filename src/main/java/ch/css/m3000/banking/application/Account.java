@@ -1,7 +1,10 @@
-package ch.css.m3000.banking;
+package ch.css.m3000.banking.application;
 
 import ch.css.m3000.banking.adapter.DateTimeAdapter;
 import ch.css.m3000.banking.adapter.SystemDateTimeAdapter;
+import ch.css.m3000.banking.domain.BankingTransaction;
+import ch.css.m3000.banking.domain.BankingTransactions;
+import ch.css.m3000.banking.domain.NotEnoughMoneyOnBankAccountException;
 
 import java.time.LocalDate;
 

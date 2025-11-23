@@ -1,4 +1,7 @@
-package ch.css.m3000.banking;
+package ch.css.m3000.banking.port;
+
+import ch.css.m3000.banking.application.Account;
+import ch.css.m3000.banking.domain.NotEnoughMoneyOnBankAccountException;
 
 import java.util.Scanner;
 
